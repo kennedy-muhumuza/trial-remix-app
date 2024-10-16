@@ -1,5 +1,10 @@
 import styles from "./NewNote.css";
 
+export interface NotesProps {
+  title: string;
+  content: string;
+}
+
 const NewNote = () => {
   return (
     <form method="post" id="note-form">

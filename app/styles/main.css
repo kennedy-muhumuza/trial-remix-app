@@ -57,6 +57,10 @@ body {
   color: var(--color-primary-10);
 }
 
+.add-note-btn {
+  margin-top: 1rem;
+}
+
 .nav-item a:hover,
 .nav-item a.active {
   color: var(--color-secondary-200);

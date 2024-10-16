@@ -1,4 +1,4 @@
-import React from "react";
+import styles from "./NewNote.css";
 
 const NewNote = () => {
   return (
@@ -12,10 +12,14 @@ const NewNote = () => {
         <textarea id="content" name="content" rows={5} required />
       </p>
       <div className="form-actions">
-        <button>Add Note</button>
+        <button className="add-note-btn">Add Note</button>
       </div>
     </form>
   );
 };
 
 export default NewNote;
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
+}

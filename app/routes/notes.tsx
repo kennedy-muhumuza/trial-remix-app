@@ -1,21 +1,27 @@
-// import { redirect } from "@remix-run/react";
 import { redirect } from "@remix-run/react";
-import React from "react";
 import NewNote, { links as newNoteLinks } from "~/components/NewNote";
+import NoteList, { links as noteListLinks } from "~/components/NoteList";
 import newNoteStyles from "~/components/NewNote.css";
 import { getStoredNotes, storedNotes } from "~/data/notes";
+// import { redirect } from "@remix-run/react";
 
 const NotesPage = () => {
   return (
     <main>
       <NewNote />
+      <NoteList />
     </main>
   );
 };
 
 export default NotesPage;
 
-export async function action({ request }) {
+export const loader = async () => {
+  const notes = await getStoredNotes();
+  return notes;
+};
+
+export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
   const noteData = Object.fromEntries(formData);
   // Add Validation...
@@ -23,9 +29,11 @@ export async function action({ request }) {
   noteData.id = new Date().toISOString();
   const updatedNotes = existingNotes.concat(noteData);
   await storedNotes(updatedNotes);
+  console.log("notes page store to notes json log");
+
   return redirect("/notes");
 }
 
 export function links() {
-  return [...newNoteLinks()];
+  return [...newNoteLinks(), ...noteListLinks()];
 }

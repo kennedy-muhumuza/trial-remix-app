@@ -3,6 +3,7 @@ import styles from "./NewNote.css";
 export interface NotesProps {
   title: string;
   content: string;
+  id: string;
 }
 
 const NewNote = () => {

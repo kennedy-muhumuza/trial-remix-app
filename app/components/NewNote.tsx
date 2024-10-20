@@ -1,4 +1,4 @@
-import { Form } from "@remix-run/react";
+import { Form, useNavigation } from "@remix-run/react";
 import styles from "./NewNote.css";
 
 export interface NotesProps {
@@ -8,6 +8,9 @@ export interface NotesProps {
 }
 
 const NewNote = () => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
     <Form method="post" id="note-form">
       <p>
@@ -19,7 +22,9 @@ const NewNote = () => {
         <textarea id="content" name="content" rows={5} required />
       </p>
       <div className="form-actions">
-        <button className="add-note-btn">Add Note</button>
+        <button className="add-note-btn" disabled={isSubmitting}>
+          Add Note
+        </button>
       </div>
     </Form>
   );

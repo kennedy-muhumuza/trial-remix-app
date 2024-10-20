@@ -1,4 +1,4 @@
-import { redirect } from "@remix-run/react";
+import { redirect, useLoaderData } from "@remix-run/react";
 import NewNote, { links as newNoteLinks } from "~/components/NewNote";
 import NoteList, { links as noteListLinks } from "~/components/NoteList";
 import newNoteStyles from "~/components/NewNote.css";
@@ -6,10 +6,11 @@ import { getStoredNotes, storedNotes } from "~/data/notes";
 // import { redirect } from "@remix-run/react";
 
 const NotesPage = () => {
+  const notes = useLoaderData();
   return (
     <main>
       <NewNote />
-      <NoteList />
+      <NoteList notes={notes} />
     </main>
   );
 };
